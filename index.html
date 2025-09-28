@@ -16,8 +16,7 @@
   <body>
     <div class="weather-app">
       <header>
-        <button id="theme-toggle" class="theme-button" type="button">Dark Theme</button>
-        <form class="search-form" id="search-form" autocomplete="off" style="position:relative;">
+  <form class="search-form" id="search-form" autocomplete="off" style="position:relative;">
           <input
             type="search"
             placeholder="Enter a city.."
@@ -28,7 +27,12 @@
           />
           <div id="city-suggestions" class="city-suggestions" style="position:absolute;left:0;right:0;z-index:10;"></div>
           <input type="submit" value="Search" class="search-form-button" />
-        </form>
+  </form>
+  <div class="header-buttons">
+    <button id="theme-toggle" class="theme-button" type="button">Dark Theme</button>
+  <button id="joke-btn" class="theme-button" type="button">Brighten My Day</button>
+  </div>
+  <div id="joke-response" class="joke-response" style="margin-top:10px;"></div>
       </header>
       <main>
         <div class="weather-app-data">
