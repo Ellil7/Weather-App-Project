@@ -19,9 +19,11 @@ body.dark-theme .ai-chat-response {
 }
 .joke-response {
   color: #2075A7;
+  font-size: 1.05em;
   font-weight: 500;
-  font-size: 1.1em;
-  margin-top: 10px;
+  margin-top: 8px;
+  margin-bottom: 28px;
+  text-align: center;
 }
 body.dark-theme .joke-response {
   color: #7ecbff;
