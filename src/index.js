@@ -52,25 +52,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const jokeResponse = document.getElementById("joke-response");
   if (jokeBtn && jokeResponse) {
     jokeBtn.addEventListener("click", function () {
-      jokeBtn.disabled = true;
-      jokeBtn.textContent = "Thinking...";
-      jokeResponse.textContent = "";
-  fetch(`https://api.shecodes.io/ai/v1/generate?prompt=Tell%20me%20a%20joke%20and%20respond%20with%20only%20the%20joke%2C%20no%20extra%20text.&key=taef532c1914eobc5596f904e3dfcfab`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.answer) {
-            jokeResponse.textContent = data.answer;
-          } else {
-            jokeResponse.textContent = "Sorry, I couldn't find a joke right now.";
-          }
-        })
-        .catch(() => {
-          jokeResponse.textContent = "Sorry, something went wrong.";
-        })
-        .finally(() => {
-          jokeBtn.disabled = false;
-          jokeBtn.textContent = "Brighten my day";
-        });
+        jokeBtn.disabled = true;
+        jokeBtn.textContent = "Thinking...";
+        jokeResponse.textContent = "";
+        const randomizer = Math.floor(Math.random() * 1000000);
+        const prompt = `Tell me a different joke from before. Respond with only the joke, no extra text. [${randomizer}]`;
+        fetch(`https://api.shecodes.io/ai/v1/generate?prompt=${encodeURIComponent(prompt)}&key=taef532c1914eobc5596f904e3dfcfab`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.answer) {
+              jokeResponse.textContent = data.answer;
+            } else {
+              jokeResponse.textContent = "Sorry, I couldn't find a joke right now.";
+            }
+          })
+          .catch(() => {
+            jokeResponse.textContent = "Sorry, something went wrong.";
+          })
+          .finally(() => {
+            jokeBtn.disabled = false;
+            jokeBtn.textContent = "Brighten my day";
+          });
     });
   }
 });
