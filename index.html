@@ -11,19 +11,22 @@
     />
     <link rel="stylesheet" href="src/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <title>Meteo App</title>
+    <title>Luna Weather App</title>
   </head>
   <body>
     <div class="weather-app">
       <header>
-        <form class="search-form" id="search-form">
+        <button id="theme-toggle" class="theme-button" type="button">Dark Theme</button>
+        <form class="search-form" id="search-form" autocomplete="off" style="position:relative;">
           <input
             type="search"
             placeholder="Enter a city.."
             required
             id="search-form-input"
             class="search-form-input"
+            autocomplete="off"
           />
+          <div id="city-suggestions" class="city-suggestions" style="position:absolute;left:0;right:0;z-index:10;"></div>
           <input type="submit" value="Search" class="search-form-button" />
         </form>
       </header>
@@ -31,6 +34,7 @@
         <div class="weather-app-data">
           <div>
             <h1 class="weather-app-city" id="city"></h1>
+            <div id="date" class="weather-app-date"></div>
             <p class="weather-app-details">
               <span id="time"></span>,
               <span id="description"></span>
@@ -42,7 +46,10 @@
           <div class="weather-app-temperature-container">
             <div id="icon"></div>
             <div class="weather-app-temperature" id="temperature"></div>
-            <div class="weather-app-unit">°C</div>
+            <div class="weather-app-unit" id="unit-toggle">
+              <a href="#" id="celsius-link" class="active">°C</a> |
+              <a href="#" id="fahrenheit-link">°F</a>
+            </div>
           </div>
         </div>
         <div class="weather-forecast" id="forecast"></div>
