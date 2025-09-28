@@ -1,3 +1,22 @@
+.ai-chatbox {
+  background: #f9f7fe;
+  border-radius: 8px;
+  padding: 16px 16px 10px 16px;
+  box-shadow: 0 2px 8px rgba(65, 50, 100, 0.04);
+  margin-bottom: 24px;
+}
+.ai-chat-response {
+  color: #2075A7;
+  font-size: 1.05em;
+  font-weight: 500;
+  margin-top: 8px;
+}
+body.dark-theme .ai-chatbox {
+  background: #222b36;
+}
+body.dark-theme .ai-chat-response {
+  color: #7ecbff;
+}
 .joke-response {
   color: #2075A7;
   font-weight: 500;

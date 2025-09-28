@@ -1,3 +1,51 @@
+// --- AI Chatbox feature ---
+document.addEventListener("DOMContentLoaded", function () {
+  const chatForm = document.getElementById("ai-chat-form");
+  const chatInput = document.getElementById("ai-chat-input");
+  const chatResponse = document.getElementById("ai-chat-response");
+  if (chatForm && chatInput && chatResponse) {
+    chatForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const question = chatInput.value.trim();
+      if (!question) return;
+      chatResponse.textContent = "Thinking...";
+      // Gather current weather data for context
+      const city = document.querySelector("#city")?.textContent || "";
+      const temp = typeof currentTempC === "number" ? `${Math.round(currentTempC)}°C` : "";
+      const desc = document.querySelector("#description")?.textContent || "";
+      const humidity = document.querySelector("#humidity")?.textContent || "";
+      const wind = document.querySelector("#wind-speed")?.textContent || "";
+      // Build forecast summary
+      let forecastSummary = "";
+      const forecastDays = document.querySelectorAll('.weather-forecast-day');
+      if (forecastDays.length > 0 && currentForecastC.length > 0) {
+        forecastSummary = " Weekly forecast:";
+        forecastDays.forEach((el, idx) => {
+          if (idx < currentForecastC.length) {
+            const dayName = el.querySelector('.weather-forecast-date')?.textContent || "";
+            const max = Math.round(currentForecastC[idx].max);
+            const min = Math.round(currentForecastC[idx].min);
+            const iconAlt = el.querySelector('img')?.alt || "";
+            forecastSummary += ` ${dayName}: ${iconAlt}, High: ${max}°C, Low: ${min}°C.`;
+          }
+        });
+      }
+  const context = `Current weather in ${city}: ${desc}, ${temp}, Humidity: ${humidity}, Wind: ${wind}.${forecastSummary} If the user asks about weather beyond this week, kindly let them know you can only provide information for the current week’s forecast.`;
+      fetch(`https://api.shecodes.io/ai/v1/generate?prompt=${encodeURIComponent(question)}&context=${encodeURIComponent(context)}&key=taef532c1914eobc5596f904e3dfcfab`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.answer) {
+            chatResponse.textContent = data.answer;
+          } else {
+            chatResponse.textContent = "Sorry, I couldn't get an answer right now.";
+          }
+        })
+        .catch(() => {
+          chatResponse.textContent = "Sorry, something went wrong.";
+        });
+    });
+  }
+});
 // --- Brighten my day (AI joke) feature ---
 document.addEventListener("DOMContentLoaded", function () {
   const jokeBtn = document.getElementById("joke-btn");
